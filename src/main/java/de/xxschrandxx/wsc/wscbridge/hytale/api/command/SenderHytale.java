@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandSender;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.permissions.PermissionsModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 
 import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
@@ -157,7 +158,11 @@ public class SenderHytale implements ISender<CommandSender> {
     }
 
     public boolean hasPermission(String permission) {
-        return this.sender.hasPermission(permission);
+        boolean holder = this.sender.hasPermission(permission);
+        if (holder) {
+            return true;
+        }
+        return PermissionsModule.get().hasPermission(getUniqueId(), permission);
     }
 
     public boolean checkPermission(String path) {
