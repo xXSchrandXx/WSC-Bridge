@@ -4,7 +4,7 @@ Quicklinks: [General](#general) | [API](#api) | [Links](#links) | [License](http
 
 # General
 ## Description
-This plugin serves as the basis for the bridge between [xXSchrandXx/de.xxschrarndxx.wsc.minecraft-api](https://github.com/xXSchrandXx/de.xxschrarndxx.wsc.minecraft-api) and a bukkit / spigot / BungeeCord plugin.
+This plugin serves as the basis for the bridge between [xXSchrandXx/de.xxschrarndxx.wsc.minecraft-api](https://github.com/xXSchrandXx/de.xxschrarndxx.wsc.minecraft-api) and a bukkit / spigot / BungeeCord or [xXSchrandXx/de.xxschrandxx.hytale-api](https://github.com/xXSchrandXx/de.xxschrandxx.hytake-api) and a hytale plugin.
 # Links
 * [PayPal](https://www.paypal.com/donate/?hosted_button_id=RFYYT7QSAU7YJ)
 * [GitHub](https://github.com/xXSchrandXx?tab=repositories)
