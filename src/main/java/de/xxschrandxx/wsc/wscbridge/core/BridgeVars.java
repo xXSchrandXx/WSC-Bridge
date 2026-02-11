@@ -27,7 +27,7 @@ public class BridgeVars extends AbstractConfiguration {
 
         // permission
         // permission.command.wscbridge
-        public static final String PermCmdWSCBridge = "perission.command.wscbridge";
+        public static final String PermCmdWSCBridge = "permission.command.wscbridge";
 
         // language
         // language.command.noperm

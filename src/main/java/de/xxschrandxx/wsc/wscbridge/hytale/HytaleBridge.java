@@ -7,11 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
-import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.internal.LinkedTreeMap;
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.console.ConsoleSender;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
@@ -128,7 +128,7 @@ public class HytaleBridge extends JavaPlugin implements IBridgePlugin {
         if (configFile.exists()) {
             try {
                 String json = Files.readString(configFile.toPath());
-                config = new ConfigurationHytale(gson.fromJson(json, HashMap.class));
+                config = new ConfigurationHytale(gson.fromJson(json, LinkedTreeMap.class));
             }
             catch (IOException e) {
                 getLogger().atWarning().log("Could not load config.json.", e);
