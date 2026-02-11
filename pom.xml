@@ -6,7 +6,7 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wscbridge</artifactId>
-	<version>3.0.2</version>
+	<version>3.0.3</version>
 
 	<name>WSC-Bridge</name>
 	<url>https://github.com/xXSchrandXx/WSC-Bridge</url>
