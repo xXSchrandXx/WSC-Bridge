@@ -7,7 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+
+import org.bstats.charts.SimpleBarChart;
+import org.bstats.hytale.Metrics;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,6 +32,7 @@ import de.xxschrandxx.wsc.wscbridge.hytale.api.HytaleBridgeAPI;
 import de.xxschrandxx.wsc.wscbridge.hytale.api.HytaleBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.hytale.api.command.SenderHytale;
 import de.xxschrandxx.wsc.wscbridge.hytale.api.event.WSCBridgeConfigReloadEventHytale;
+import de.xxschrandxx.wsc.wscbridge.hytale.api.event.WSCBridgeModuleEventHytale;
 import de.xxschrandxx.wsc.wscbridge.hytale.api.event.WSCBridgePluginReloadEventHytale;
 import de.xxschrandxx.wsc.wscbridge.hytale.commands.WSCBridgeHytale;
 
@@ -105,6 +113,24 @@ public class HytaleBridge extends JavaPlugin implements IBridgePlugin {
             aliases = getConfiguration().getStringList(BridgeVars.Configuration.cmdAliases);
         }
         getCommandRegistry().registerCommand(new WSCBridgeHytale(aliases));
+
+        // Load bStats
+        Metrics metrics = new Metrics(getInstance(), 29835);
+        HytaleServer.get().getEventBus()
+            .dispatchForAsync(WSCBridgeModuleEventHytale.class)
+            .dispatch(new WSCBridgeModuleEventHytale())
+            .whenComplete((event, error) -> {
+                metrics.addCustomChart(new SimpleBarChart("Module", new Callable<Map<String, Integer>>() {
+                    @Override
+                    public Map<String, Integer> call() throws Exception {
+                        Map<String, Integer> map = new HashMap<String, Integer>();
+                        for (String module : event.getModules()) {
+                            map.put(module, 1);
+                        }
+                        return map;
+                    }
+                }));
+            });
     }
 
     @Override

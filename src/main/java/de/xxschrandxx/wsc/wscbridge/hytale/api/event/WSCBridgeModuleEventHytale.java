@@ -2,9 +2,9 @@ package de.xxschrandxx.wsc.wscbridge.hytale.api.event;
 
 import java.util.ArrayList;
 
-import com.hypixel.hytale.event.IEvent;
+import com.hypixel.hytale.event.IAsyncEvent;
 
-public class WSCBridgeModuleEventHytale implements IEvent<Void> {
+public class WSCBridgeModuleEventHytale implements IAsyncEvent<Void> {
     protected ArrayList<String> modules = new ArrayList<String>();
 
     public ArrayList<String> getModules() {

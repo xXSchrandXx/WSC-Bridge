@@ -6,15 +6,16 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wscbridge</artifactId>
-	<version>3.0.3</version>
+	<version>3.0.4</version>
 
 	<name>WSC-Bridge</name>
 	<url>https://github.com/xXSchrandXx/WSC-Bridge</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<!-- use Java 17 for our own sources; shade plugin already handles Java 21 dependency classes -->
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<repositories>
@@ -54,14 +55,17 @@
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bukkit</artifactId>
-			<version>3.1.0</version>
-			<scope>compile</scope>
+			<version>3.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bungeecord</artifactId>
-			<version>3.1.0</version>
-			<scope>compile</scope>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bstats</groupId>
+			<artifactId>bstats-hytale</artifactId>
+			<version>3.2.1</version>
 		</dependency>
 	</dependencies>
 
@@ -116,7 +120,19 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.4</version>
+				<version>3.4.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>9.6</version>
+					</dependency>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm-commons</artifactId>
+						<version>9.6</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<id>Add public</id>
