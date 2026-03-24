@@ -6,7 +6,7 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wscbridge</artifactId>
-	<version>3.0.4</version>
+	<version>3.0.5</version>
 
 	<name>WSC-Bridge</name>
 	<url>https://github.com/xXSchrandXx/WSC-Bridge</url>
@@ -28,6 +28,11 @@
 		<repository>
 			<id>hytale-repo</id>
 			<url>https://maven.hytale.com/release</url>
+		</repository>
+		<!-- Velocity Repo -->
+		<repository>
+			<id>papermc</id>
+			<url>https://repo.papermc.io/repository/maven-public/</url>
 		</repository>
 	</repositories>
 
@@ -51,21 +56,37 @@
 			<artifactId>Server</artifactId>
 			<version>2026.01.24-6e2d4fc36</version>
 		</dependency>
+		<!-- Velocity-->
+		<dependency>
+			<groupId>com.velocitypowered</groupId>
+			<artifactId>velocity-api</artifactId>
+			<version>3.5.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- bStats -->
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bukkit</artifactId>
 			<version>3.2.1</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bungeecord</artifactId>
 			<version>3.2.1</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-hytale</artifactId>
 			<version>3.2.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.bstats</groupId>
+			<artifactId>bstats-velocity</artifactId>
+			<version>3.2.1</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
@@ -78,6 +99,29 @@
 			</resource>
 		</resources>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<id>filter-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/java</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
